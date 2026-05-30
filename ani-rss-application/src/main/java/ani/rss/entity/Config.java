@@ -711,4 +711,54 @@ public class Config implements Serializable {
 
     @Schema(description = "唯一ID")
     private String uuid;
+
+    /**
+     * Pan115 启用
+     */
+    @Schema(description = "Pan115 启用")
+    private Boolean pan115Enabled = false;
+
+    /**
+     * Pan115 下载模式: cloud_only, local_only, hybrid
+     */
+    @Schema(description = "Pan115 下载模式: cloud_only, local_only, hybrid")
+    private String pan115DownloadMode = "hybrid";
+
+    /**
+     * Pan115 默认下载到本地
+     */
+    @Schema(description = "Pan115 默认下载到本地")
+    private Boolean pan115DefaultToLocal = false;
+
+    /**
+     * Pan115 加密凭证 (base64 encrypted blob)
+     */
+    @Schema(description = "Pan115 加密凭证")
+    private String pan115EncryptedCredentials;
+
+    /**
+     * Pan115 最小请求间隔 (毫秒)
+     */
+    @Schema(description = "Pan115 最小请求间隔(毫秒)")
+    private Integer pan115MinRequestInterval = 500;
+
+    /**
+     * Pan115 本地下载分块大小 (MB)
+     */
+    @Schema(description = "Pan115 本地下载分块大小(MB)")
+    private Integer pan115ChunkSizeMb = 4;
+
+    /**
+     * Pan115 本地下载最大重试
+     */
+    @Schema(description = "Pan115 本地下载最大重试")
+    private Integer pan115MaxRetries = 3;
+
+
+
+    /**
+     * Pan115 离线下载超时 (分钟)
+     */
+    @Schema(description = "Pan115 离线下载超时(分钟)")
+    private Integer pan115OfflineTimeout = 60;
 }

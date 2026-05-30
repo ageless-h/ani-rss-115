@@ -86,6 +86,18 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            <!-- Bouncy Castle for ChaCha20-Poly1305 + Argon2id -->
+            <dependency>
+                <groupId>org.bouncycastle</groupId>
+                <artifactId>bcprov-jdk18on</artifactId>
+                <version>1.78.1</version>
+            </dependency>
+            <!-- OS Keychain integration -->
+            <dependency>
+                <groupId>com.github.javakeyring</groupId>
+                <artifactId>java-keyring</artifactId>
+                <version>1.0.4</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

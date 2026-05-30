@@ -444,6 +444,29 @@ public class ConfigUtil {
         for (NotificationConfig notificationConfig : notificationConfigList) {
             BeanUtil.copyProperties(newNotificationConfig, notificationConfig, copyOptions);
         }
+
+        config.setPan115DownloadMode(StrUtil.blankToDefault(config.getPan115DownloadMode(), "hybrid"));
+        if (config.getPan115Enabled() == null) {
+            config.setPan115Enabled(false);
+        }
+        if (StrUtil.isNotBlank(config.getPan115EncryptedCredentials())) {
+            config.setPan115Enabled(true);
+        }
+        if (config.getPan115DefaultToLocal() == null) {
+            config.setPan115DefaultToLocal(false);
+        }
+        if (config.getPan115MinRequestInterval() == null) {
+            config.setPan115MinRequestInterval(500);
+        }
+        if (config.getPan115ChunkSizeMb() == null) {
+            config.setPan115ChunkSizeMb(4);
+        }
+        if (config.getPan115MaxRetries() == null) {
+            config.setPan115MaxRetries(3);
+        }
+        if (config.getPan115OfflineTimeout() == null) {
+            config.setPan115OfflineTimeout(60);
+        }
     }
 
     /**

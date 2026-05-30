@@ -103,6 +103,8 @@ public class ConfigController extends BaseController {
         Integer renameSleepSeconds = config.getRenameSleepSeconds();
         Integer sleep = config.getRssSleepMinutes();
         String download = config.getDownloadToolType();
+        Boolean pan115Enabled = config.getPan115Enabled();
+        String pan115EncryptedCredentials = config.getPan115EncryptedCredentials();
 
         newConfig.setExpirationTime(null)
                 .setOutTradeNo(null)
@@ -117,6 +119,11 @@ public class ConfigController extends BaseController {
                 config,
                 copyOptions
         );
+
+        // Pan115 登录由扫码接口独立维护。设置页面持有的旧 Config 可能还没有
+        // 最新凭证，保存普通设置时不能把刚扫码成功的状态覆盖回未启用。
+        config.setPan115Enabled(pan115Enabled);
+        config.setPan115EncryptedCredentials(pan115EncryptedCredentials);
 
         String loginPassword = config.getLogin().getPassword();
         // 密码未发生修改

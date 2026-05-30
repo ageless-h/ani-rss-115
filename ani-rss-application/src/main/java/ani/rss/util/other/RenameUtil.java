@@ -59,11 +59,15 @@ public class RenameUtil {
             e = ReUtil.get(REG_STR, itemTitle, 2);
         }
 
+        String episodeStr;
         if (StrUtil.isBlank(e)) {
-            return false;
+            if (!isSingleEpisodeSpecial(ani, itemTitle)) {
+                return false;
+            }
+            episodeStr = "1";
+        } else {
+            episodeStr = ReUtil.get("\\d+(\\.5)?", e, 0);
         }
-
-        String episodeStr = ReUtil.get("\\d+(\\.5)?", e, 0);
         if (StrUtil.isBlank(episodeStr)) {
             return false;
         }
@@ -136,6 +140,16 @@ public class RenameUtil {
         item
                 .setReName(reName);
         return true;
+    }
+
+    private static boolean isSingleEpisodeSpecial(Ani ani, String itemTitle) {
+        Integer totalEpisodeNumber = ani.getTotalEpisodeNumber();
+        if (!Objects.equals(totalEpisodeNumber, 1)) {
+            return false;
+        }
+
+        String title = StrUtil.nullToEmpty(ani.getTitle()) + " " + StrUtil.nullToEmpty(itemTitle);
+        return ReUtil.contains("(?i)(^|[^a-z0-9])(tvsp|sp|ova|oad)([^a-z0-9]|$)|特别篇|特別篇|番外", title);
     }
 
     /**

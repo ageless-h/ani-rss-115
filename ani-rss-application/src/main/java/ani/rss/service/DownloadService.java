@@ -64,6 +64,9 @@ public class DownloadService {
 
         int currentDownloadCount = 0;
         List<Item> items = ItemsUtil.getItems(ani);
+        if (items.isEmpty()) {
+            log.warn("{} 未解析到可下载条目，请检查 RSS 标题集数、匹配规则和排除规则: {}", title, ani.getUrl());
+        }
 
         ItemsUtil.omit(ani, items);
         log.debug("{} 共 {} 个", title, items.size());

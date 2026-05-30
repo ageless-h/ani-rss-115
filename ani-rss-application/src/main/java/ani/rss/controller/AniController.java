@@ -95,6 +95,8 @@ public class AniController extends BaseController {
             ThreadUtil.execute(() -> {
                 if (TorrentUtil.login()) {
                     downloadService.downloadAni(ani);
+                } else {
+                    log.warn("下载工具登录失败，订阅 {} 添加后未触发下载", title);
                 }
             });
         } else {
